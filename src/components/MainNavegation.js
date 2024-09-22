@@ -1,4 +1,5 @@
-import { Logo } from "./Logo";
+import CartDarkMode from "../assets/CartDarkMode.png";
+import CartLightMode from "../assets/CartLightMode.png";
 import { SearchForm } from "./SearchForm";
 import { DarkModeCartIcon, LightModeCartIcon } from "../UI/Cart";
 import classes from "./MainNavegation.module.css";
@@ -25,7 +26,11 @@ export const MainNavegation = () => {
       <nav>
         <ul>
           <li className={classes.logo}>
-            <Logo />
+            {isDarkMode ? (
+              <img src={CartDarkMode} alt="logo" />
+            ) : (
+              <img src={CartLightMode} alt="logo" />
+            )}
           </li>
           <li className={classes.search}>
             <SearchForm />

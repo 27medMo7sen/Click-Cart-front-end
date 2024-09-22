@@ -20,11 +20,15 @@ ul {
 li {
   display: flex;
 }
+
 .logo {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.logo img {
   width: 90px;
+  border-radius: 9px;
 }
 .toggle {
   display: flex;
