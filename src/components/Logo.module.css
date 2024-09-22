@@ -1,0 +1,18 @@
+.first {
+  background-color: transparent;
+  display: inline-block;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+.second {
+  background-color: rgb(33, 116, 211);
+  color: #fff;
+  border-radius: 6px;
+  display: inline-block;
+  padding: 5px;
+}
+.container {
+  border-radius: 6px;
+  width: 84px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}

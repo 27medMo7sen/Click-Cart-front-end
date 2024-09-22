@@ -1,7 +1,19 @@
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Root } from "./pages/Root";
 function App() {
+  const isDark = useSelector((state) => state.ui.darkMode);
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Root />,
+      children: [],
+    },
+  ]);
+
   return (
-    <div className="flex w-80 justify-center items-center">
-      <p className="inline">tailwind css.</p>
+    <div dark-theme={isDark ? "dark" : "light"}>
+      <RouterProvider router={router} />
     </div>
   );
 }

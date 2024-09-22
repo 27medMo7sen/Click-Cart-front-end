@@ -1,0 +1,171 @@
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  background-color: var(--background-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+  width: 100%;
+}
+ul {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+li {
+  display: flex;
+}
+.toggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 40%;
+  min-width: 40%;
+}
+.Button-signin {
+  background-color: rgb(33, 116, 211);
+  border: none;
+  color: white;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+
+  width: 65px;
+  min-width: 65px;
+  max-width: 65px;
+}
+.Button-signin:hover {
+  background-color: rgb(65, 131, 206);
+}
+.Button-signup {
+  background-color: var(--foreground-color);
+  border: none;
+  color: var(--primary-color);
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+
+  width: 65px; /* fixed width */
+  min-width: 65px; /* prevents shrinking below this value */
+  max-width: 65px; /* prevents growing beyond this value */
+}
+
+.Button-signup:hover {
+  background-color: var(--foreground-color);
+}
+.Button-cart {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 65px;
+  background-color: transparent;
+  border: 1px solid #a1a1a1;
+  color: var(--secondary-color);
+  font-size: 16px;
+  cursor: pointer;
+  gap: 4px;
+  border-radius: 8px;
+  min-width: 65px;
+}
+.Button-cart:hover {
+  background-color: var(--foreground-color);
+}
+.counter {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+  width: 20px;
+  font-weight: 600;
+  border-radius: 35%;
+  transition: color 0.3s;
+}
+.group {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.Button-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: var(--primary-color);
+  cursor: pointer;
+  text-align: center;
+}
+.search-small {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  border: none;
+  background-color: var(--foreground-color);
+}
+@media (max-width: 480px) {
+  ul {
+    width: 100%;
+  }
+  .Button-signup {
+    display: none;
+  }
+  .Button-signin {
+    display: none;
+  }
+  .group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: auto;
+  }
+  .search {
+    display: none;
+  }
+  .search-small {
+    display: flex;
+  }
+}
+@media (min-width: 481px) and (max-width: 768px) {
+  ul {
+    width: 100%;
+  }
+  .search {
+    width: 250px;
+  }
+  .Button-signup {
+    display: none;
+  }
+  .Button-signin {
+    display: none;
+  }
+  .group {
+    width: auto;
+  }
+}
+@media (min-width: 769px) {
+  .Button-menu {
+    display: none;
+  }
+}

@@ -1,0 +1,17 @@
+.icon {
+  font-size: 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s;
+}
+.icon:hover {
+  transform: rotateZ(25deg);
+}
+
+@media (max-width: 768px) {
+  .icon {
+    font-size: 1.5rem;
+  }
+}

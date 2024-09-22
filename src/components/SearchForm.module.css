@@ -1,0 +1,38 @@
+.SearchForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.Input {
+  display: flex;
+  color: var(--primary-color);
+  background-color: var(--foreground-color);
+  border: none;
+  border-radius: 14px 0 0 14px;
+  padding: 6px;
+  width: 100%;
+  height: 35px;
+}
+.Input:focus {
+  outline: none;
+  border-color: #1c4aca;
+  background-color: var(--focus-color);
+}
+.Button {
+  background-color: var(--foreground-color);
+  color: white;
+  padding: 6px;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  height: 35px;
+  border-radius: 0 14px 14px 0;
+}
+
+@media (max-width: 480px) {
+  .Input {
+    display: none;
+  }
+}
