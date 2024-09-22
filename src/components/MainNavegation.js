@@ -24,7 +24,7 @@ export const MainNavegation = () => {
     <Fragment>
       <nav>
         <ul>
-          <li>
+          <li className={classes.logo}>
             <Logo />
           </li>
           <li className={classes.search}>

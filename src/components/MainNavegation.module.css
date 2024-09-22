@@ -20,6 +20,12 @@ ul {
 li {
   display: flex;
 }
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90px;
+}
 .toggle {
   display: flex;
   justify-content: center;
@@ -30,7 +36,7 @@ li {
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 40%;
+  width: 380;
   min-width: 40%;
 }
 .Button-signin {
@@ -99,7 +105,7 @@ li {
 }
 .group {
   display: flex;
-  width: 50%;
+  width: 280px;
   justify-content: center;
   align-items: center;
   gap: 15px;
@@ -167,5 +173,8 @@ li {
 @media (min-width: 769px) {
   .Button-menu {
     display: none;
+  }
+  ul {
+    gap: 30px;
   }
 }
