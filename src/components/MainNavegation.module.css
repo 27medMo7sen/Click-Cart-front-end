@@ -55,7 +55,7 @@ li {
   font-size: 16px;
   cursor: pointer;
   border-radius: 8px;
-
+  text-decoration: none;
   width: 65px;
   min-width: 65px;
   max-width: 65px;
@@ -74,7 +74,7 @@ li {
   font-size: 16px;
   cursor: pointer;
   border-radius: 8px;
-
+  text-decoration: none;
   width: 65px; /* fixed width */
   min-width: 65px; /* prevents shrinking below this value */
   max-width: 65px; /* prevents growing beyond this value */
@@ -176,9 +176,6 @@ li {
   }
 }
 @media (min-width: 769px) {
-  .Button-menu {
-    display: none;
-  }
   ul {
     gap: 30px;
   }

@@ -11,6 +11,13 @@ const ModalOverlay = (props) => {
     </div>
   );
 };
+const SideModalOverlay = (props) => {
+  return (
+    <div className={classes.SideModalOverlay}>
+      <div>{props.children}</div>
+    </div>
+  );
+};
 export const Modal = (props) => {
   return (
     <Fragment>
@@ -20,6 +27,20 @@ export const Modal = (props) => {
       )}
       {ReactDom.createPortal(
         <ModalOverlay>{props.children}</ModalOverlay>,
+        document.getElementById("overlays")
+      )}
+    </Fragment>
+  );
+};
+export const SideModal = (props) => {
+  return (
+    <Fragment>
+      {ReactDom.createPortal(
+        <Backdrop onClose={props.onClose} />,
+        document.getElementById("overlays")
+      )}
+      {ReactDom.createPortal(
+        <SideModalOverlay>{props.children}</SideModalOverlay>,
         document.getElementById("overlays")
       )}
     </Fragment>
