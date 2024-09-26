@@ -183,9 +183,6 @@
   left: calc(100% - 18px);
 }
 
-.checkbox-label:hover .checkbox-custom {
-  background-color: #bbb;
-}
 @keyframes slideDown {
   0% {
     transform: translateY(-100%);

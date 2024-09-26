@@ -68,6 +68,14 @@ export const SignupForm = () => {
     valueBlurHandler: ageBlurHandler,
     reset: resetAge,
   } = useInput((value) => value >= 18);
+  const disabled = !(
+    userNameIsValid &&
+    emailIsValid &&
+    passwordIsValid &&
+    confirmPasswordIsValid &&
+    phoneIsValid &&
+    ageIsValid
+  );
   return (
     <div className={classes.wraper}>
       <div className={classes.container}>
@@ -241,7 +249,7 @@ export const SignupForm = () => {
               )}
             </div>
           </div>
-          <button className={classes.button} type="submit">
+          <button className={classes.button} disabled={disabled} type="submit">
             Signup
           </button>
           <span>
