@@ -7,7 +7,7 @@ import { uiActions } from "../store/ui-slice";
 import { useDispatch } from "react-redux";
 import { SideModal } from "../UI/Modal";
 import { SideMenuNavegation } from "../components/sideMenuNav/SideMenuNavegation";
-import { ModalSearch } from "../components/ModalSearch";
+import { SearchForm } from "../components/SearchForm";
 export const Root = () => {
   const cartIsVisible = useSelector((state) => state.ui.cartIsVisible);
   const searchModalIsVisible = useSelector(
@@ -37,7 +37,7 @@ export const Root = () => {
       {cartIsVisible && <Modal onClose={closeCart} />}
       {searchModalIsVisible && (
         <Modal onClose={closeSearchModal}>
-          <ModalSearch />
+          <SearchForm />
         </Modal>
       )}
       <Outlet />

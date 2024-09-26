@@ -1,10 +1,5 @@
-import { Form } from "../UI/Form";
-import { Input } from "../UI/Input";
+import { SignupForm } from "../components/SignupForm";
 
 export const Signup = () => {
-  return (
-    <Form>
-      <Input type="text" label="Name" />
-    </Form>
-  );
+  return <SignupForm />;
 };

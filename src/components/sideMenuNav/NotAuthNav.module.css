@@ -1,4 +1,4 @@
-.Button-signin {
+.Button-login {
   background-color: rgb(33, 116, 211);
   border: none;
   color: white;
@@ -14,7 +14,7 @@
   max-width: 95%;
   text-decoration: none;
 }
-.Button-signin:hover {
+.Button-login:hover {
   background-color: rgb(65, 131, 206);
 }
 .Button-signup {

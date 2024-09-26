@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { SideModal } from "../UI/Modal";
 
 export const uiSlice = createSlice({
   name: "ui",

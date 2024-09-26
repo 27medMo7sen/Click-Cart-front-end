@@ -2,7 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Root } from "./pages/Root";
 import { useEffect } from "react";
-import { Signin } from "./pages/Signin";
+import { Login } from "./pages/Login";
 import { HomePage } from "./pages/Home";
 import { Signup } from "./pages/Signup";
 function App() {
@@ -16,12 +16,10 @@ function App() {
     {
       path: "/",
       element: <Root />,
-      children: [
-        { index: true, element: <HomePage /> },
-        { path: "signin", element: <Signin /> },
-        { path: "signup", element: <Signup /> },
-      ],
+      children: [{ index: true, element: <HomePage /> }],
     },
+    { path: "Login", element: <Login /> },
+    { path: "signup", element: <Signup /> },
   ]);
 
   return (

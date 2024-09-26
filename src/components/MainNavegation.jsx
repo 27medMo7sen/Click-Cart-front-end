@@ -53,11 +53,11 @@ export const MainNavegation = () => {
                 size={16}
               />
             </span>
-            <Link className={classes["Button-signin"]} to={"signin"}>
-              sign in
+            <Link className={classes["Button-login"]} to={"login"}>
+              Login
             </Link>
             <Link className={classes["Button-signup"]} to={"signup"}>
-              sign up
+              signup
             </Link>
             <button
               className={classes["Button-cart"]}

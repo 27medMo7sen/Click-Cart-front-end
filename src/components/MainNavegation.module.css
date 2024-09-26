@@ -44,7 +44,7 @@ li {
   width: 380;
   min-width: 40%;
 }
-.Button-signin {
+.Button-login {
   background-color: rgb(33, 116, 211);
   border: none;
   color: white;
@@ -60,7 +60,7 @@ li {
   min-width: 65px;
   max-width: 65px;
 }
-.Button-signin:hover {
+.Button-login:hover {
   background-color: rgb(65, 131, 206);
 }
 .Button-signup {
@@ -142,7 +142,7 @@ li {
   .Button-signup {
     display: none;
   }
-  .Button-signin {
+  .Button-login {
     display: none;
   }
   .group {
@@ -168,7 +168,7 @@ li {
   .Button-signup {
     display: none;
   }
-  .Button-signin {
+  .Button-login {
     display: none;
   }
   .group {

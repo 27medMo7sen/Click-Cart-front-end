@@ -1,0 +1,185 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.7s;
+}
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.logo {
+  width: 80px;
+}
+.logo-link {
+  align-self: flex-start;
+}
+.title {
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+.Form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding-bottom: 20px;
+}
+.input-container,
+.invalid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 80%;
+  position: relative;
+}
+.label {
+  font-size: 16px;
+  color: var(--primary-color);
+  align-self: flex-start;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 80%;
+  gap: 10px;
+}
+.password-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+.password-icon {
+  position: absolute;
+  left: 90%;
+}
+.input {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  color: var(--primary-color);
+  font-size: 16px;
+  border-radius: 8px;
+  background-color: var(--foreground-color);
+  position: relative;
+}
+
+.phone-age {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+}
+.phone-age .input {
+  width: 90%;
+  align-self: flex-start;
+}
+.age-container,
+.invalid-age {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 70px;
+}
+.invalid-age input {
+  border: 1px solid red;
+  background-color: rgb(255, 87, 87, 0.2);
+}
+.invalid-age label {
+  color: rgb(255, 84, 84);
+}
+.invalid-age input:focus {
+  background-color: rgba(255, 154, 154, 0.2);
+}
+.age {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--primary-color);
+  font-size: 16px;
+  background-color: var(--foreground-color);
+}
+.button {
+  background-color: rgb(33, 116, 211);
+  border: none;
+  color: white;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  text-decoration: none;
+  width: 65px;
+  min-width: 65px;
+  max-width: 65px;
+}
+.button:hover {
+  background-color: rgb(65, 131, 206);
+}
+.login-link {
+  color: var(--primary-color);
+}
+.button:disabled,
+.button:disabled:hover,
+.button:disabled:active {
+  background-color: #ccc;
+  color: #666;
+  border-color: #ccc;
+  cursor: not-allowed;
+}
+.error-message {
+  color: rgb(255, 84, 84);
+  font-size: 14px;
+}
+.invalid input {
+  border: 1px solid red;
+  background-color: rgb(255, 87, 87, 0.2);
+}
+.invalid label {
+  color: rgb(255, 84, 84);
+}
+.invalid input:focus {
+  background-color: rgba(255, 154, 154, 0.2);
+}
+.wraper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  height: 100vh;
+}
+@keyframes slideDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  70% {
+    transform: translateY(10%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
