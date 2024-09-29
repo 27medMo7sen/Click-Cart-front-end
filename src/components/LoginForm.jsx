@@ -47,7 +47,7 @@ export const LoginForm = () => {
           </Link>
           <span className={classes.title}>Login</span>
         </div>
-        <form className={classes.Form} autoComplete="false">
+        <form className={classes.Form} autoComplete="off">
           <div
             className={
               classes[`${emailHasError ? "invalid" : "input-container"}`]

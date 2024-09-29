@@ -3,13 +3,13 @@ import CartDarkMode from "../assets/CartDarkMode.png";
 import CartLightMode from "../assets/CartLightMode.png";
 import classes from "./SignupForm.module.css";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Form, useActionData } from "react-router-dom";
 import { MdOutlinePerson } from "react-icons/md";
 import { HiOutlineMail } from "react-icons/hi";
 import { TiPhoneOutline } from "react-icons/ti";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { TbKey } from "react-icons/tb";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
 
@@ -20,54 +20,128 @@ export const SignupForm = () => {
   };
   const isDarkMode = useSelector((state) => state.ui.darkMode);
   const logoUrl = isDarkMode ? CartDarkMode : CartLightMode;
+  const data = useActionData();
+
   const {
     enteredValue: userName,
     hasError: userNameHasError,
     isValid: userNameIsValid,
+    reqError: userNameReqError,
+    errorMessage: userNameErrorMessage,
+    defaultErrorMessageHandler: userNameDefaultErrorHandler,
+    reqErrorHandler: userNameReqErrorHandler,
     valueChangeHandler: userNameChangeHandler,
     valueBlurHandler: userNameBlurHandler,
-    reset: resetUserName,
   } = useInput((value) => value.trim().length >= 3);
   const {
     enteredValue: email,
     hasError: emailHasError,
     isValid: emailIsValid,
+    reqError: emailReqError,
+    errorMessage: emailErrorMessage,
+    defaultErrorMessageHandler: emailDefaultErrorHandler,
+    reqErrorHandler: emailReqErrorHandler,
     valueChangeHandler: emailChangeHandler,
     valueBlurHandler: emailBlurHandler,
-    reset: resetEmail,
   } = useInput((value) => value.trim().includes("@"));
   const {
     enteredValue: password,
     hasError: passwordHasError,
     isValid: passwordIsValid,
+    reqError: passwordReqError,
+    errorMessage: passwordErrorMessage,
+    defaultErrorMessageHandler: passwordDefaultErrorHandler,
+    reqErrorHandler: passwordReqErrorHandler,
     valueChangeHandler: passwordChangeHandler,
     valueBlurHandler: passwordBlurHandler,
-    reset: resetPassword,
   } = useInput((value) => value.trim().length >= 6);
   const {
     enteredValue: confirmPassword,
     hasError: confirmPasswordHasError,
     isValid: confirmPasswordIsValid,
+    reqError: confirmPasswordReqError,
+    errorMessage: confirmPasswordErrorMessage,
+    defaultErrorMessageHandler: confirmPasswordDefaultErrorHandler,
+    reqErrorHandler: confirmPasswordReqErrorHandler,
     valueChangeHandler: confirmPasswordChangeHandler,
     valueBlurHandler: confirmPasswordBlurHandler,
-    reset: resetConfirmPassword,
   } = useInput((value) => value === password);
   const {
-    enteredValue: phone,
+    enteredValue: phoneNumber,
     hasError: phoneHasError,
     isValid: phoneIsValid,
+    reqError: phoneReqError,
+    errorMessage: phoneErrorMessage,
+    defaultErrorMessageHandler: phoneDefaultErrorHandler,
+    reqErrorHandler: phoneReqErrorHandler,
     valueChangeHandler: phoneChangeHandler,
     valueBlurHandler: phoneBlurHandler,
-    reset: resetPhone,
   } = useInput((value) => value.trim().length >= 10);
   const {
     enteredValue: age,
     hasError: ageHasError,
     isValid: ageIsValid,
+    reqError: ageReqError,
+    errorMessage: ageErrorMessage,
+    defaultErrorMessageHandler: ageDefaultErrorHandler,
+    reqErrorHandler: ageReqErrorHandler,
     valueChangeHandler: ageChangeHandler,
     valueBlurHandler: ageBlurHandler,
-    reset: resetAge,
   } = useInput((value) => value >= 18);
+  useEffect(() => {
+    userNameDefaultErrorHandler("Please enter a valid user name");
+    emailDefaultErrorHandler(" Please enter a valid email");
+    passwordDefaultErrorHandler("Password must be at least 6 characters");
+    confirmPasswordDefaultErrorHandler("Password must be the same");
+    phoneDefaultErrorHandler("Please enter a valid phone number");
+    ageDefaultErrorHandler("Above 18");
+    if (data && data.status === 400) {
+      for (const key in data.data.message[0]) {
+        // console.log("ahmed");
+        console.log(data.data.message[0][key].context.key);
+        if (data.data.message[0][key].context.key === "userName") {
+          userNameReqErrorHandler(data.data.message[0][key].context.label);
+        }
+        if (data.data.message[0][key].context.key === "email") {
+          emailReqErrorHandler(data.data.message[0][key].context.label);
+        }
+        if (data.data.message[0][key].context.key === "password") {
+          passwordReqErrorHandler(data.data.message[0][key].context.label);
+        }
+        if (data.data.message[0][key].context.key === "confirmPassword") {
+          confirmPasswordReqErrorHandler(
+            data.data.message[0][key].context.label
+          );
+        }
+        if (data.data.message[0][key].context.key === "phoneNumber") {
+          phoneReqErrorHandler(data.data.message[0][key].context.label);
+        }
+        if (data.data.message[0][key].context.key === "age") {
+          ageReqErrorHandler(data.data.message[0][key].context.label);
+        }
+      }
+    }
+  }, [
+    data,
+    ageDefaultErrorHandler,
+    ageReqErrorHandler,
+    confirmPasswordDefaultErrorHandler,
+    confirmPasswordReqErrorHandler,
+    emailDefaultErrorHandler,
+    emailReqErrorHandler,
+    passwordDefaultErrorHandler,
+    passwordReqErrorHandler,
+    phoneDefaultErrorHandler,
+    phoneReqErrorHandler,
+    userNameDefaultErrorHandler,
+    userNameReqErrorHandler,
+  ]);
+  useEffect(() => {
+    if (data && data.status === 436) {
+      emailReqErrorHandler(data.message);
+    }
+  }, [data, emailReqErrorHandler]);
+
   const disabled = !(
     userNameIsValid &&
     emailIsValid &&
@@ -76,6 +150,7 @@ export const SignupForm = () => {
     phoneIsValid &&
     ageIsValid
   );
+
   return (
     <div className={classes.wraper}>
       <div className={classes.container}>
@@ -85,10 +160,20 @@ export const SignupForm = () => {
           </Link>
           <span className={classes.title}>Create new account</span>
         </div>
-        <form className={classes.Form} autoComplete="false">
+        <Form
+          method="POST"
+          className={classes.Form}
+          // onSubmit={submitHandler}
+        >
           <div
             className={
-              classes[`${userNameHasError ? "invalid" : "input-container"}`]
+              classes[
+                `${
+                  userNameHasError || userNameReqError
+                    ? "invalid"
+                    : "input-container"
+                }`
+              ]
             }
           >
             <label htmlFor="userName" className={classes.label}>
@@ -101,18 +186,23 @@ export const SignupForm = () => {
               value={userName}
               onBlur={userNameBlurHandler}
               onChange={userNameChangeHandler}
+              name="userName"
               autoComplete="off"
               className={classes.input}
             />
-            {userNameHasError && (
+            {(userNameHasError || userNameReqError) && (
               <span className={classes["error-message"]}>
-                Please enter a valid user name
+                {userNameErrorMessage}
               </span>
             )}
           </div>
           <div
             className={
-              classes[`${emailHasError ? "invalid" : "input-container"}`]
+              classes[
+                `${
+                  emailHasError || emailReqError ? "invalid" : "input-container"
+                }`
+              ]
             }
           >
             <label htmlFor="E-mail" className={classes.label}>
@@ -125,18 +215,25 @@ export const SignupForm = () => {
               value={email}
               onBlur={emailBlurHandler}
               onChange={emailChangeHandler}
+              name="email"
               autoComplete="off"
               className={classes.input}
             />
-            {emailHasError && (
+            {(emailHasError || emailReqError) && (
               <span className={classes["error-message"]}>
-                Please enter a valid email
+                {emailErrorMessage}
               </span>
             )}
           </div>
           <div
             className={
-              classes[`${passwordHasError ? "invalid" : "input-container"}`]
+              classes[
+                `${
+                  passwordHasError || passwordReqError
+                    ? "invalid"
+                    : "input-container"
+                }`
+              ]
             }
           >
             <label htmlFor="passord" className={classes.label}>
@@ -150,6 +247,7 @@ export const SignupForm = () => {
                 value={password}
                 onBlur={passwordBlurHandler}
                 onChange={passwordChangeHandler}
+                name="password"
                 autoComplete="off"
                 className={classes.input}
               ></input>
@@ -161,16 +259,20 @@ export const SignupForm = () => {
                 {visible ? <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
-            {passwordHasError && (
+            {(passwordHasError || passwordReqError) && (
               <span className={classes["error-message"]}>
-                Password must be at least 6 characters
+                {passwordErrorMessage}
               </span>
             )}
           </div>
           <div
             className={
               classes[
-                `${confirmPasswordHasError ? "invalid" : "input-container"}`
+                `${
+                  confirmPasswordHasError || confirmPasswordReqError
+                    ? "invalid"
+                    : "input-container"
+                }`
               ]
             }
           >
@@ -181,10 +283,11 @@ export const SignupForm = () => {
             <div className={classes["password-container"]}>
               <input
                 type={visible ? "text" : "password"}
-                id="password"
+                id="confirm-password"
                 value={confirmPassword}
                 onBlur={confirmPasswordBlurHandler}
                 onChange={confirmPasswordChangeHandler}
+                name="confirmPassword"
                 autoComplete="off"
                 className={classes.input}
               />
@@ -195,16 +298,22 @@ export const SignupForm = () => {
                 {visible ? <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
-            {confirmPasswordHasError && (
+            {(confirmPasswordHasError || confirmPasswordReqError) && (
               <span className={classes["error-message"]}>
-                Password must match
+                {confirmPasswordErrorMessage}
               </span>
             )}
           </div>
           <div className={classes["phone-age"]}>
             <div
               className={
-                classes[`${phoneHasError ? "invalid" : "input-container"}`]
+                classes[
+                  `${
+                    phoneHasError || phoneReqError
+                      ? "invalid"
+                      : "input-container"
+                  }`
+                ]
               }
             >
               <label htmlFor="phone" className={classes.label}>
@@ -214,21 +323,26 @@ export const SignupForm = () => {
               <input
                 type="text"
                 id="phone"
-                value={phone}
+                value={phoneNumber}
                 onBlur={phoneBlurHandler}
                 onChange={phoneChangeHandler}
+                name="phone"
                 autoComplete="off"
                 className={classes.input}
               />
-              {phoneHasError && (
+              {(phoneHasError || phoneReqError) && (
                 <span className={classes["error-message"]}>
-                  Please enter a valid phone number
+                  {phoneErrorMessage}
                 </span>
               )}
             </div>
             <div
               className={
-                classes[`${ageHasError ? "invalid-age" : "age-container"}`]
+                classes[
+                  `${
+                    ageHasError || ageReqError ? "invalid-age" : "age-container"
+                  }`
+                ]
               }
             >
               <label htmlFor="age" className={classes.label}>
@@ -241,11 +355,14 @@ export const SignupForm = () => {
                 value={age}
                 onBlur={ageBlurHandler}
                 onChange={ageChangeHandler}
+                name="age"
                 autoComplete="off"
                 className={classes.age}
               />
-              {ageHasError && (
-                <span className={classes["error-message"]}>Obove 18</span>
+              {(ageHasError || ageReqError) && (
+                <span className={classes["error-message"]}>
+                  {ageErrorMessage}
+                </span>
               )}
             </div>
           </div>
@@ -258,7 +375,7 @@ export const SignupForm = () => {
               login
             </Link>
           </span>
-        </form>
+        </Form>
       </div>
     </div>
   );

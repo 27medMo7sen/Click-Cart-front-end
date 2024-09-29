@@ -5,6 +5,9 @@ import { useEffect } from "react";
 import { Login } from "./pages/Login";
 import { HomePage } from "./pages/Home";
 import { Signup } from "./pages/Signup";
+import { Confirm } from "./pages/Confirm";
+import { Error } from "./pages/Error";
+import { action as signupAction } from "./pages/Signup";
 function App() {
   const isDark = useSelector((state) => state.ui.darkMode);
   useEffect(() => {
@@ -16,10 +19,14 @@ function App() {
     {
       path: "/",
       element: <Root />,
-      children: [{ index: true, element: <HomePage /> }],
+      errorElement: <Error />,
+      children: [
+        { index: true, element: <HomePage /> },
+        { path: "signup", element: <Signup />, action: signupAction },
+      ],
     },
     { path: "Login", element: <Login /> },
-    { path: "signup", element: <Signup /> },
+    { path: "confirm/:token", element: <Confirm /> },
   ]);
 
   return (

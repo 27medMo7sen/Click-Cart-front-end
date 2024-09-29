@@ -1,0 +1,46 @@
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 350px;
+  padding: 10px;
+  background-color: var(--foreground-color);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px var(--border-color);
+}
+.container p {
+  font-size: 18px;
+  color: var(--primary-color);
+}
+.container h1 {
+  font-size: 25px;
+  color: var(--primary-color);
+}
+.Button-login {
+  background-color: rgb(33, 116, 211);
+  border: none;
+  color: white;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  text-decoration: none;
+}
+.Button-login:hover {
+  background-color: rgb(65, 131, 206);
+}
