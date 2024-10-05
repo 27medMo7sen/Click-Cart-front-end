@@ -10,10 +10,9 @@ nav {
   z-index: 0;
 }
 ul {
-  width: 70%;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
+  justify-content: space-around;
   align-items: center;
   padding: 0;
   margin: 0;
@@ -63,6 +62,33 @@ li {
 .Button-login:hover {
   background-color: rgb(65, 131, 206);
 }
+.Button-profile {
+  background-color: var(--foreground-color);
+  border: none;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  text-decoration: none;
+  height: 30px;
+  width: auto;
+  max-width: 120px;
+  min-width: 65px;
+}
+.user-name {
+  font-size: 16px;
+  color: var(--primary-color);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.logout-form {
+  width: auto;
+}
 .Button-signup {
   background-color: var(--foreground-color);
   border: none;
@@ -110,7 +136,7 @@ li {
 }
 .group {
   display: flex;
-  width: 280px;
+  width: 350px;
   justify-content: center;
   align-items: center;
   gap: 15px;
@@ -135,11 +161,19 @@ li {
   border: none;
   background-color: var(--foreground-color);
 }
+.profile-pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
 @media (max-width: 480px) {
   ul {
-    width: 100%;
+    justify-content: space-between;
   }
   .Button-signup {
+    display: none;
+  }
+  .Button-profile {
     display: none;
   }
   .Button-login {
@@ -147,9 +181,12 @@ li {
   }
   .group {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     width: auto;
+  }
+  .logout-form {
+    display: none;
   }
   .search {
     display: none;
@@ -159,13 +196,16 @@ li {
   }
 }
 @media (min-width: 481px) and (max-width: 768px) {
-  ul {
-    width: 100%;
-  }
   .search {
     width: 250px;
   }
   .Button-signup {
+    display: none;
+  }
+  .Button-profile {
+    display: none;
+  }
+  .logout-form {
     display: none;
   }
   .Button-login {
@@ -173,10 +213,5 @@ li {
   }
   .group {
     width: auto;
-  }
-}
-@media (min-width: 769px) {
-  ul {
-    gap: 30px;
   }
 }

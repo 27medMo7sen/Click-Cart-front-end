@@ -1,17 +1,18 @@
-import { useParams } from "react-router-dom";
-import { useHttp } from "../hooks/use-http";
-import { useEffect } from "react";
+import { json } from "react-router-dom";
 import { ConfirmCelebration } from "../components/ConfirmCelebration";
 
 export const Confirm = () => {
-  const { token } = useParams();
-  const { sendRequest: sendConfirmationRequest } = useHttp();
-  const getData = (data) => {
-    console.log(data);
-  };
-  useEffect(() => {
-    const confirmaionRequest = async () => {};
-  }, [sendConfirmationRequest, token]);
   return <ConfirmCelebration />;
 };
-export const ConfirmationLoader = async () => {};
+export const ConfirmationLoader = async ({ requset, params }) => {
+  const { token } = params;
+  const res = await fetch("http://localhost:4000/auth/confirm/" + token, {
+    Credential: "include",
+  });
+  const data = await res.json();
+  console.log(res.status);
+  if (!res.ok) {
+    throw json({ message: data.message }, { status: res.status });
+  }
+  return data;
+};

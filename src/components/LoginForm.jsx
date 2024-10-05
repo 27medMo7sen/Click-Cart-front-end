@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CartDarkMode from "../assets/CartDarkMode.png";
 import CartLightMode from "../assets/CartLightMode.png";
 import classes from "./LoginForm.module.css";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Form, useActionData, useNavigation } from "react-router-dom";
 import { useInput } from "../hooks/use-input";
 import { HiOutlineMail } from "react-icons/hi";
 import { TbKey } from "react-icons/tb";
@@ -15,6 +15,9 @@ export const LoginForm = () => {
   const toggleVisibility = () => {
     setVisible((prev) => !prev);
   };
+  const data = useActionData();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
   const isDarkMode = useSelector((state) => state.ui.darkMode);
   const [isChecked, setIsChecked] = useState(false);
 
@@ -26,18 +29,55 @@ export const LoginForm = () => {
     enteredValue: email,
     hasError: emailHasError,
     isValid: emailIsValid,
+    reqError: emailReqError,
+    errorMessage: emailErrorMessage,
+    defaultErrorMessageHandler: emailDefaultErrorHandler,
+    reqErrorHandler: emailReqErrorHandler,
     valueChangeHandler: emailChangeHandler,
     valueBlurHandler: emailBlurHandler,
-    reset: resetEmail,
   } = useInput((value) => value.trim().includes("@"));
   const {
     enteredValue: password,
     hasError: passwordHasError,
     isValid: passwordIsValid,
+    reqError: passwordReqError,
+    errorMessage: passwordErrorMessage,
+    defaultErrorMessageHandler: passwordDefaultErrorHandler,
+    reqErrorHandler: passwordReqErrorHandler,
     valueChangeHandler: passwordChangeHandler,
     valueBlurHandler: passwordBlurHandler,
-    reset: resetPassword,
   } = useInput((value) => value.trim().length >= 6);
+  useEffect(() => {
+    emailDefaultErrorHandler("Please enter a valid email");
+    passwordDefaultErrorHandler("Password must be at least 6 characters");
+    if (data && data.status === 400) {
+      for (const key in data.data) {
+        if (data.data[key].context.key === "email") {
+          emailReqErrorHandler(data.data[key].context.label);
+        }
+        if (data.data[key].context.key === "password") {
+          passwordReqErrorHandler(data.data[key].context.label);
+        }
+      }
+    }
+    if (data && data.status === 436) {
+      if (data.data) {
+        if (data.data === "Email not found") {
+          emailReqErrorHandler("Email not found");
+        }
+        if (data.data === "Password not correct") {
+          console.log("heredone");
+          passwordReqErrorHandler("Password is incorrect");
+        }
+      }
+    }
+  }, [
+    data,
+    emailDefaultErrorHandler,
+    passwordDefaultErrorHandler,
+    emailReqErrorHandler,
+    passwordReqErrorHandler,
+  ]);
   return (
     <div className={classes.wraper}>
       <div className={classes.container}>
@@ -47,10 +87,14 @@ export const LoginForm = () => {
           </Link>
           <span className={classes.title}>Login</span>
         </div>
-        <form className={classes.Form} autoComplete="off">
+        <Form method="POST" className={classes.Form}>
           <div
             className={
-              classes[`${emailHasError ? "invalid" : "input-container"}`]
+              classes[
+                `${
+                  emailHasError || emailReqError ? "invalid" : "input-container"
+                }`
+              ]
             }
           >
             <label htmlFor="E-mail" className={classes.label}>
@@ -61,20 +105,27 @@ export const LoginForm = () => {
               type="email"
               id="email"
               value={email}
+              name="email"
               onBlur={emailBlurHandler}
               onChange={emailChangeHandler}
               autoComplete="off"
               className={classes.input}
             />
-            {emailHasError && (
+            {(emailHasError || emailReqError) && (
               <span className={classes["error-message"]}>
-                Please enter a valid email
+                {emailErrorMessage}
               </span>
             )}
           </div>
           <div
             className={
-              classes[`${passwordHasError ? "invalid" : "input-container"}`]
+              classes[
+                `${
+                  passwordHasError || passwordReqError
+                    ? "invalid"
+                    : "input-container"
+                }`
+              ]
             }
           >
             <label htmlFor="passord" className={classes.label}>
@@ -88,7 +139,8 @@ export const LoginForm = () => {
                 value={password}
                 onBlur={passwordBlurHandler}
                 onChange={passwordChangeHandler}
-                autocomplete="false"
+                name="password"
+                autoComplete="off"
                 className={classes.input}
               />
               <span
@@ -98,9 +150,9 @@ export const LoginForm = () => {
                 {visible ? <FaEye /> : <FaEyeSlash />}
               </span>
             </div>
-            {passwordHasError && (
+            {(passwordHasError || passwordReqError) && (
               <span className={classes["error-message"]}>
-                Password must be at least 6 characters
+                {passwordErrorMessage}
               </span>
             )}
           </div>
@@ -116,20 +168,26 @@ export const LoginForm = () => {
               Remember Me
             </label>
           </div>
+          <div className={classes["forgot-password-container"]}>
+            <Link to="forgot-password" className={classes.text}>
+              {" "}
+              forgot password?
+            </Link>
+          </div>
           <button
             className={classes.button}
-            disabled={!emailIsValid || !passwordIsValid}
+            disabled={!emailIsValid || !passwordIsValid || isSubmitting}
             type="submit"
           >
-            Login
+            {isSubmitting ? "Loading" : "Login"}
           </button>
           <span>
             You don't have an account?
             <Link to={"/signup"} className={classes["signup-link"]}>
-              signup
+              Signup
             </Link>
           </span>
-        </form>
+        </Form>
       </div>
     </div>
   );

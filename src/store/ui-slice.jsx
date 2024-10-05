@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 export const uiSlice = createSlice({
   name: "ui",
   initialState: {
@@ -7,6 +6,7 @@ export const uiSlice = createSlice({
     cartIsVisible: false,
     SideModalIsVisible: false,
     searchModalIsVisible: false,
+    cropperModalIsVisible: false,
   },
   reducers: {
     toggle(state) {
@@ -20,6 +20,9 @@ export const uiSlice = createSlice({
     },
     toggleSearchModal(state) {
       state.searchModalIsVisible = !state.searchModalIsVisible;
+    },
+    toggleCropperModal(state) {
+      state.cropperModalIsVisible = !state.cropperModalIsVisible;
     },
   },
 });

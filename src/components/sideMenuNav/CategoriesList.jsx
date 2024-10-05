@@ -5,7 +5,7 @@ import fashion from "../icons/fashion.png";
 import jewellery from "../icons/jewellery.png";
 import makeup from "../icons/makeup.png";
 import furniture from "../icons/furniture.png";
-
+import footware from "../icons/footware.png";
 import { CategoryItem } from "./CategoryItem";
 import classes from "./CategoriesList.module.css";
 const CategoriesListArr = [
@@ -43,6 +43,11 @@ const CategoriesListArr = [
     id: 7,
     name: "Furniture",
     icon: furniture,
+  },
+  {
+    id: 8,
+    name: "Footware",
+    icon: footware,
   },
 ];
 export const CategoriesList = () => {

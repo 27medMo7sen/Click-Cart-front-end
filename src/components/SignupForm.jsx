@@ -3,7 +3,7 @@ import CartDarkMode from "../assets/CartDarkMode.png";
 import CartLightMode from "../assets/CartLightMode.png";
 import classes from "./SignupForm.module.css";
 import { useSelector } from "react-redux";
-import { Link, Form, useActionData } from "react-router-dom";
+import { Link, Form, useActionData, useNavigation } from "react-router-dom";
 import { MdOutlinePerson } from "react-icons/md";
 import { HiOutlineMail } from "react-icons/hi";
 import { TiPhoneOutline } from "react-icons/ti";
@@ -21,6 +21,8 @@ export const SignupForm = () => {
   const isDarkMode = useSelector((state) => state.ui.darkMode);
   const logoUrl = isDarkMode ? CartDarkMode : CartLightMode;
   const data = useActionData();
+  const navigation = useNavigation();
+  const isSubmitting = navigation.state === "submitting";
 
   const {
     enteredValue: userName,
@@ -97,8 +99,6 @@ export const SignupForm = () => {
     ageDefaultErrorHandler("Above 18");
     if (data && data.status === 400) {
       for (const key in data.data.message[0]) {
-        // console.log("ahmed");
-        console.log(data.data.message[0][key].context.key);
         if (data.data.message[0][key].context.key === "userName") {
           userNameReqErrorHandler(data.data.message[0][key].context.label);
         }
@@ -138,9 +138,13 @@ export const SignupForm = () => {
   ]);
   useEffect(() => {
     if (data && data.status === 436) {
-      emailReqErrorHandler(data.message);
+      if (data.data.message === "User name already exist") {
+        userNameReqErrorHandler(data.data.message);
+      }
+      if (data.data.message === "Email already exist")
+        emailReqErrorHandler(data.data.message);
     }
-  }, [data, emailReqErrorHandler]);
+  }, [data, emailReqErrorHandler, userNameReqErrorHandler]);
 
   const disabled = !(
     userNameIsValid &&
@@ -366,8 +370,12 @@ export const SignupForm = () => {
               )}
             </div>
           </div>
-          <button className={classes.button} disabled={disabled} type="submit">
-            Signup
+          <button
+            className={classes.button}
+            disabled={disabled || isSubmitting}
+            type="submit"
+          >
+            {isSubmitting ? "Loading..." : "Signup"}
           </button>
           <span>
             allready have an account?
