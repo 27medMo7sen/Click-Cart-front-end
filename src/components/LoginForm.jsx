@@ -9,7 +9,6 @@ import { HiOutlineMail } from "react-icons/hi";
 import { TbKey } from "react-icons/tb";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
-
 export const LoginForm = () => {
   const [visible, setVisible] = useState(false);
   const toggleVisibility = () => {
@@ -20,7 +19,6 @@ export const LoginForm = () => {
   const isSubmitting = navigation.state === "submitting";
   const isDarkMode = useSelector((state) => state.ui.darkMode);
   const [isChecked, setIsChecked] = useState(false);
-
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };

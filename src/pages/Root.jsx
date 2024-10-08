@@ -1,6 +1,6 @@
 import { Fragment, useState, useEffect } from "react";
 import { MainNavegation } from "../components/MainNavegation";
-import { Outlet, useNavigation } from "react-router-dom";
+import { Outlet, useNavigation, redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Modal } from "../UI/Modal";
 import { uiActions } from "../store/ui-slice";
@@ -9,6 +9,7 @@ import { SideModal } from "../UI/Modal";
 import { SideMenuNavegation } from "../components/sideMenuNav/SideMenuNavegation";
 import { SearchForm } from "../components/SearchForm";
 import LoadingBar from "react-top-loading-bar";
+import "react-toastify/dist/ReactToastify.css";
 import Cookies from "js-cookie";
 export const Root = () => {
   const cartIsVisible = useSelector((state) => state.ui.cartIsVisible);
@@ -38,6 +39,7 @@ export const Root = () => {
   const closeSearchModal = () => {
     dispatch(uiActions.toggleSearchModal());
   };
+
   return (
     <Fragment>
       <LoadingBar
@@ -64,6 +66,6 @@ export const Root = () => {
 export const tokenLoader = () => {
   const token = Cookies.get("userToken");
   console.log(token);
-  if (!token) return null;
+  if (!token) return redirect("/login");
   return token;
 };

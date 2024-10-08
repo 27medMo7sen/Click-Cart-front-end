@@ -4,7 +4,9 @@ import profilePicHolder from "../components/icons/360_F_516275801_f3Fsp17x6HQK0x
 export const userSlice = createSlice({
   name: "user",
   initialState: {
-    profilePic: profilePicHolder,
+    role: "",
+    defaultProfilePic: profilePicHolder,
+    profilePic: "",
     userName: "",
     email: "",
     phoneNumber: "",
@@ -13,6 +15,9 @@ export const userSlice = createSlice({
   reducers: {
     setProfilePic(state, action) {
       state.profilePic = action.payload;
+    },
+    setDefaultProfilePic(state, action) {
+      state.profilePic = state.defaultProfilePic;
     },
     setUserName(state, action) {
       state.userName = action.payload;
@@ -25,6 +30,9 @@ export const userSlice = createSlice({
     },
     setAge(state, action) {
       state.age = action.payload;
+    },
+    setRole(state, action) {
+      state.role = action.payload;
     },
   },
 });

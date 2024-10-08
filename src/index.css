@@ -14,9 +14,9 @@ body {
 }
 
 :root {
-  --background-color: #fff;
-  --hover-color: #f7f6f6;
-  --foreground-color: #f1f1f1d3;
+  --background-color: rgb(255, 255, 255);
+  --hover-color: #d6d5d5;
+  --foreground-color: #e4e7f1d3;
   --primary-color: black;
   --secondary-color: #fff;
   --skeleton-base-color: #cececed3;

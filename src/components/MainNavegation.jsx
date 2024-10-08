@@ -10,9 +10,16 @@ import { DarkModeSwitch } from "react-toggle-dark-mode";
 import { Fragment, useEffect, useState, useCallback } from "react";
 import { DarkModeMenuIcon, LightModeMenuIcon } from "../UI/MenuIcon";
 import { LightModeSearchIcon, DarkModeSearchIcon } from "../UI/SearchIcon";
-import { Form, json, Link, useRouteLoaderData } from "react-router-dom";
+import {
+  Form,
+  json,
+  Link,
+  NavLink,
+  useRouteLoaderData,
+} from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { IoSettingsOutline } from "react-icons/io5";
 
 export const MainNavegation = () => {
   const dispatch = useDispatch();
@@ -20,18 +27,21 @@ export const MainNavegation = () => {
   const userToken = useRouteLoaderData("root");
   const [isLoading, setIsLoading] = useState(false);
   const navHandler = useCallback(
-    (profilePic, userName, email, phoneNumber, age) => {
-      console.log(profilePic, userName, email, phoneNumber, age);
+    (profilePic, userName, email, phoneNumber, age, role) => {
+      console.log(profilePic, userName, email, phoneNumber, age, role);
       if (profilePic) dispatch(userActions.setProfilePic(profilePic));
+      else dispatch(userActions.setDefaultProfilePic());
       dispatch(userActions.setUserName(userName));
       dispatch(userActions.setEmail(email));
       dispatch(userActions.setPhoneNumber(phoneNumber));
       dispatch(userActions.setAge(age));
+      dispatch(userActions.setRole(role));
     },
     [dispatch]
   );
   const profilePic = useSelector((state) => state.user.profilePic);
   const userName = useSelector((state) => state.user.userName);
+  const role = useSelector((state) => state.user.role);
   useEffect(() => {
     if (userToken) {
       async function fetchData() {
@@ -51,7 +61,8 @@ export const MainNavegation = () => {
           data.userName,
           data.email,
           data.phoneNumber,
-          data.age
+          data.age,
+          data.role
         );
         setIsLoading(false);
       }
@@ -83,7 +94,7 @@ export const MainNavegation = () => {
 
   return (
     <Fragment>
-      <nav>
+      <nav className={classes["main-nav"]}>
         <ul>
           <Link to={"/"}>
             <li className={classes.logo}>
@@ -105,23 +116,39 @@ export const MainNavegation = () => {
                 size={16}
               />
             </span>
-            {userToken && (
-              <Link to={"/profile"} className={classes["Button-profile"]}>
-                {isLoading ? (
-                  <Skeleton circle={true} height={30} width={30} />
-                ) : (
+            {userToken &&
+              (isLoading ? (
+                <div className={classes["Skeleton-wrapper"]}>
+                  <Skeleton height={30} width={100} />
+                </div>
+              ) : (
+                <NavLink
+                  to={"/profile"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? classes["Button-profile-active"]
+                      : classes["Button-profile"]
+                  }
+                >
                   <img
                     src={profilePic}
                     alt={userName}
                     className={classes["profile-pic"]}
                   />
-                )}
-                {isLoading ? (
-                  <Skeleton width={60} />
-                ) : (
+
                   <span className={classes["user-name"]}>{userName}</span>
-                )}
-              </Link>
+                </NavLink>
+              ))}
+            {userToken && role === ("Admin" || "SuperAdmin") && (
+              <NavLink
+                to="/admin"
+                className={({ isActive }) =>
+                  isActive ? classes["admin-active"] : classes.admin
+                }
+              >
+                <IoSettingsOutline />
+                <span>Control Panel</span>
+              </NavLink>
             )}
             {userToken && (
               <Form
@@ -129,9 +156,10 @@ export const MainNavegation = () => {
                 action="/logout"
                 className={classes["logout-form"]}
               >
-                <button className={classes["Button-login"]}>Logout</button>
+                <button className={classes["Button-logout"]}>Logout</button>
               </Form>
             )}
+
             {!userToken && (
               <Link className={classes["Button-login"]} to={"login"}>
                 Login

@@ -14,6 +14,12 @@ export const useInput = (validateValue) => {
     },
     [setDefualtErrorMessage]
   );
+  const setValue = useCallback(
+    (value) => {
+      setEnteredValue(value);
+    },
+    [setEnteredValue]
+  );
   const reqErrorHandler = useCallback(
     (message) => {
       setReqError(true);
@@ -51,6 +57,7 @@ export const useInput = (validateValue) => {
     isValid,
     reqError,
     errorMessage,
+    setValue,
     defaultErrorMessageHandler,
     reqErrorHandler,
     valueChangeHandler,

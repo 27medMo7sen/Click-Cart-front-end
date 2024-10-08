@@ -3,17 +3,19 @@
   align-self: flex-start;
   flex-direction: column;
   align-items: center;
-  width: 600px;
+  width: 610px;
   height: 500px;
+  min-width: auto;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px rgba(109, 107, 107, 0.2);
   border: 1px solid var(--border-color);
 }
 .header {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
+  width: 608px;
+  min-width: auto;
   border-radius: 10px 10px 0 0;
   height: 50px;
   background-color: var(--foreground-color);
@@ -27,4 +29,20 @@
   font-size: 20px;
   font-weight: 600;
   color: var(--primary-color);
+}
+@media (max-width: 1024px) {
+  .container {
+    width: 400px;
+  }
+  .header {
+    width: 398px;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .container {
+    width: 300px;
+  }
+  .header {
+    width: 298px;
+  }
 }

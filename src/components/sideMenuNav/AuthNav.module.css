@@ -1,0 +1,82 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  padding: 20px 0;
+  gap: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  width: 190px;
+  background-color: var(--foreground-color);
+  text-decoration: none;
+  color: var(--primary-color);
+}
+.admin span {
+  font-size: 16px;
+  font-weight: 600;
+}
+.Button-profile {
+  background-color: var(--foreground-color);
+  border: none;
+  color: var(--primary-color);
+  padding: 6px;
+  display: flex;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  gap: 10px;
+  width: 190px;
+  min-width: 190px;
+  max-width: 190px;
+  text-decoration: none;
+}
+.profile-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.user-name {
+  font-size: 16px;
+  color: var(--primary-color);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.logout-form {
+  width: auto;
+  height: auto;
+}
+.Button-logout {
+  background-color: rgb(65, 131, 206);
+  border: none;
+  color: white;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  text-decoration: none;
+  width: 190px;
+  min-width: 190px;
+  max-width: 190px;
+}
+@media (min-width: 769px) {
+  .container {
+    display: none;
+  }
+}

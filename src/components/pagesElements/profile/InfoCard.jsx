@@ -1,15 +1,14 @@
-import { Form, useActionData, useLoaderData } from "react-router-dom";
+import { useActionData, Link } from "react-router-dom";
 import classes from "./InfoCard.module.css";
 import { TiPhoneOutline } from "react-icons/ti";
 import { IoCalendarNumberOutline } from "react-icons/io5";
 import { MdOutlineEdit } from "react-icons/md";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { userActions } from "../../../store/user-slice";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-import { uiActions } from "../../../store/ui-slice";
 export const InfoCard = ({ handler, isLoading }) => {
   const actionData = useActionData();
   const dispatch = useDispatch();
@@ -53,6 +52,7 @@ export const InfoCard = ({ handler, isLoading }) => {
             type="button"
             className={classes["button-upload"]}
             onClick={clickHandler}
+            disabled={isLoading}
           >
             <MdOutlineEdit />
           </button>
@@ -65,9 +65,11 @@ export const InfoCard = ({ handler, isLoading }) => {
               className={classes["profile-pic"]}
             />
           )}
+          <div className={classes["main-info"]}>
+            <h3>{userName}</h3>
+            <p>{email}</p>
+          </div>
         </div>
-        <h3>{userName}</h3>
-        <p>{email}</p>
         <div className={classes["info-section"]}>
           <p>
             <TiPhoneOutline /> {phoneNumber}
@@ -77,7 +79,9 @@ export const InfoCard = ({ handler, isLoading }) => {
           </p>
         </div>
         <div className={classes["button-container"]}>
-          <button className={classes["button-edit"]}>Edit</button>
+          <Link className={classes["button-edit"]} to={"edit"}>
+            Edit
+          </Link>
         </div>
       </div>
     </div>

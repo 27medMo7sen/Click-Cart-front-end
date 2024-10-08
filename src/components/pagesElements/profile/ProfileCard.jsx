@@ -6,14 +6,19 @@ import { uiActions } from "../../../store/ui-slice";
 import { userActions } from "../../../store/user-slice";
 import classes from "./ProfileCard.module.css";
 import { ImageCropper } from "./ImageCropper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { base64ToBlob } from "../../../utils/ConvertToBlob";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 export const ProfileCard = () => {
   const navigate = useNavigate();
   const [image, setImage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    const token = Cookies.get("userToken");
+    if (!token) navigate("/login");
+  }, [navigate]);
   const setImageHandler = (imageSetted) => {
     console.log("setImgaeHandler");
     setImage(imageSetted);
@@ -30,7 +35,6 @@ export const ProfileCard = () => {
     const croppedImageBlob = base64ToBlob(croppedImageDataURL);
     const formData = new FormData();
     formData.append("image", croppedImageBlob, "profile-pic.jpg");
-
     setImage(croppedImageDataURL);
     dispatch(uiActions.toggleCropperModal());
     try {
@@ -45,9 +49,21 @@ export const ProfileCard = () => {
         body: formData,
       });
       const data = await res.json();
+      if (data.message === "invalid token" || data.message === "wrong token")
+        navigate("/login");
       if (!res.ok) throw new Error(data.message);
       console.log(data);
       dispatch(userActions.setProfilePic(croppedImageDataURL));
+      toast.success("profile picture updated", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);

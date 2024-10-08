@@ -1,11 +1,11 @@
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import classes from "./ImageCropper.module.css";
 import Cropper from "react-easy-crop";
 
 export const ImageCropper = ({ image, onCropDone, onCropCanceled }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [aspect, setAspect] = useState(1 / 1);
+  const [aspect] = useState(13 / 13);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const onCropComplete = (croppedAreaPersentage, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);

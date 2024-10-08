@@ -3,7 +3,7 @@
   background-color: var(--foreground-color);
   height: 80px;
   min-height: 80px;
-  width: 80%;
+  width: 420px;
   align-items: center;
   border-radius: 10px;
   padding: 0 20px;
@@ -42,4 +42,44 @@
   width: 80px;
   height: 90%;
   color: var(--primary-color);
+}
+@media (max-width: 1024px) {
+  .container {
+    width: 90%;
+  }
+  .status {
+    width: 200px;
+  }
+  .price-and-date {
+    width: 60px;
+  }
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  .container {
+    width: 250px;
+  }
+  .status {
+    width: 200px;
+  }
+  .price-and-date {
+    width: 60px;
+  }
+  .icon {
+    height: 30px;
+    width: 30px;
+  }
+  .status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    width: 125px;
+    height: 100%;
+    color: var(--primary-color);
+  }
+  .price-and-date {
+    width: 40px;
+    font-size: 13px;
+  }
 }

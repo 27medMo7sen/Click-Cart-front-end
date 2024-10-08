@@ -1,8 +1,8 @@
-nav {
+.main-nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 5px;
+  padding: 5px 5px;
   background-color: var(--background-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s;
@@ -14,11 +14,14 @@ ul {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  gap: 10px;
   padding: 0;
   margin: 0;
 }
 li {
   display: flex;
+  padding: 0;
+  margin: 0;
 }
 
 .logo {
@@ -40,8 +43,9 @@ li {
   justify-content: center;
   align-items: center;
   height: 100%;
-  width: 380;
-  min-width: 40%;
+  width: 480px;
+  max-width: 480px;
+  min-width: 20%;
 }
 .Button-login {
   background-color: rgb(33, 116, 211);
@@ -59,6 +63,23 @@ li {
   min-width: 65px;
   max-width: 65px;
 }
+.Button-logout {
+  background-color: rgb(33, 116, 211);
+  border: none;
+  color: white;
+  padding: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  text-decoration: none;
+  height: 30px;
+  width: 65px;
+  min-width: 65px;
+  max-width: 65px;
+}
 .Button-login:hover {
   background-color: rgb(65, 131, 206);
 }
@@ -67,6 +88,7 @@ li {
   border: none;
   color: var(--primary-color);
   display: flex;
+  gap: 5px;
   align-items: center;
   font-size: 16px;
   cursor: pointer;
@@ -75,11 +97,29 @@ li {
   text-decoration: none;
   height: 30px;
   width: auto;
-  max-width: 120px;
-  min-width: 65px;
+  max-width: 110px;
+}
+.Button-profile-active {
+  background-color: var(--hover-color);
+  border: none;
+  color: var(--primary-color);
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  text-decoration: none;
+  height: 30px;
+  width: auto;
+  max-width: 110px;
+}
+.Button-profile:hover {
+  background-color: var(--hover-color);
 }
 .user-name {
-  font-size: 16px;
+  font-size: 14px;
   color: var(--primary-color);
   font-weight: 600;
   white-space: nowrap;
@@ -88,6 +128,7 @@ li {
 }
 .logout-form {
   width: auto;
+  height: 30px;
 }
 .Button-signup {
   background-color: var(--foreground-color);
@@ -136,7 +177,7 @@ li {
 }
 .group {
   display: flex;
-  width: 350px;
+  width: auto;
   justify-content: center;
   align-items: center;
   gap: 15px;
@@ -166,6 +207,40 @@ li {
   height: 30px;
   border-radius: 50%;
 }
+.admin {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 30px;
+  width: 110px;
+  background-color: var(--foreground-color);
+  text-decoration: none;
+  color: var(--primary-color);
+  border-radius: 8px;
+}
+.admin span {
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+}
+.admin-active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 30px;
+  width: 110px;
+  background-color: var(--hover-color);
+  text-decoration: none;
+  color: var(--primary-color);
+  border-radius: 8px;
+}
+.admin-active span {
+  display: flex;
+  font-size: 12px;
+  font-weight: 600;
+}
 @media (max-width: 480px) {
   ul {
     justify-content: space-between;
@@ -176,6 +251,9 @@ li {
   .Button-profile {
     display: none;
   }
+  .Button-profile-active {
+    display: none;
+  }
   .Button-login {
     display: none;
   }
@@ -184,6 +262,12 @@ li {
     justify-content: space-evenly;
     align-items: center;
     width: auto;
+  }
+  .admin {
+    display: none;
+  }
+  .admin-active {
+    display: none;
   }
   .logout-form {
     display: none;
@@ -205,6 +289,15 @@ li {
   .Button-profile {
     display: none;
   }
+  .Button-profile-active {
+    display: none;
+  }
+  .admin {
+    display: none;
+  }
+  .admin-active {
+    display: none;
+  }
   .logout-form {
     display: none;
   }
@@ -213,5 +306,8 @@ li {
   }
   .group {
     width: auto;
+  }
+  .Skeleton-wrapper {
+    display: none;
   }
 }

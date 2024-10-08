@@ -7,11 +7,14 @@ import { HomePage } from "./pages/Home";
 import { Signup } from "./pages/Signup";
 import { Confirm, ConfirmationLoader } from "./pages/Confirm";
 import { Error } from "./pages/Error";
+import { EditProfile, action as editProfileAction } from "./pages/EditProfile";
 import { action as signupAction } from "./pages/Signup";
 import { CheckInbox } from "./pages/CheckInbox";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { action as LogoutAction } from "./pages/Logout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   ForgotPasswordEmail,
   action as emailForgotPassword,
@@ -21,7 +24,9 @@ import {
   action as resetPasswordAction,
 } from "./pages/NewPassword";
 import { Profile } from "./pages/Profile";
-
+import { Admin } from "./pages/admin/Admin";
+import { AdminCategory } from "./pages/admin/admin-nav/AdminCategory";
+import { AddCategory } from "./pages/admin/admin-nav/admin-forms/AddCategory";
 function App() {
   const isDark = useSelector((state) => state.ui.darkMode);
   useEffect(() => {
@@ -59,6 +64,22 @@ function App() {
           ],
         },
         {
+          path: "admin",
+          element: <Admin />,
+          children: [
+            {
+              path: "",
+              element: <AdminCategory />,
+              children: [
+                {
+                  index: true,
+                  element: <AddCategory />,
+                },
+              ],
+            },
+          ],
+        },
+        {
           path: "login",
           children: [
             { index: true, element: <Login />, action: loginAction },
@@ -85,7 +106,14 @@ function App() {
         },
         {
           path: "profile",
-          element: <Profile />,
+          children: [
+            { index: true, element: <Profile /> },
+            {
+              path: "edit",
+              element: <EditProfile />,
+              action: editProfileAction,
+            },
+          ],
         },
       ],
     },
@@ -99,6 +127,18 @@ function App() {
 
   return (
     <div>
+      <ToastContainer
+        theme="colored"
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <SkeletonTheme
         baseColor="var(--skeleton-base-color)"
         highlightColor="var(--skeleton-highlight-color)"
