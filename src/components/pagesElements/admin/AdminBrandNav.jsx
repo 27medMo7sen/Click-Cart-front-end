@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import classes from "./AdminNav.module.css";
-export const AdminCategoryNav = () => {
+export const AdminBrandNav = () => {
   return (
     <nav className={classes["sub-nav"]}>
       <ul className={classes["admin-ul"]}>

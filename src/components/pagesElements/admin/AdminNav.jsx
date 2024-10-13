@@ -8,7 +8,7 @@ export const AdminNav = () => {
         <ul className={classes["admin-ul"]}>
           <li className={classes["admin-li"]}>
             <NavLink
-              to={""}
+              to={"categories"}
               className={({ isActive }) =>
                 isActive ? classes["admin-li-active"] : classes["admin-link"]
               }
@@ -18,7 +18,7 @@ export const AdminNav = () => {
           </li>
           <li className={classes["admin-li"]}>
             <NavLink
-              to={"sub-categories"}
+              to={"subcategories"}
               className={({ isActive }) =>
                 isActive ? classes["admin-li-active"] : classes["admin-link"]
               }
