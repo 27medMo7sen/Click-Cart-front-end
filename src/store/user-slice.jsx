@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import profilePicHolder from "../components/icons/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.png";
+import profilePicHolder from "../assets/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.png";
 
 export const userSlice = createSlice({
   name: "user",
