@@ -48,9 +48,12 @@ export const ProfileCard = () => {
         credentials: "include",
         body: formData,
       });
+      console.log(res);
+
       const data = await res.json();
       if (data.message === "invalid token" || data.message === "wrong token")
         navigate("/login");
+
       if (!res.ok) throw new Error(data.message);
       console.log(data);
       dispatch(userActions.setProfilePic(croppedImageDataURL));
