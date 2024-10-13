@@ -11,6 +11,8 @@ export const AuthNav = () => {
   };
   const profilePic = useSelector((state) => state.user.profilePic);
   const userName = useSelector((state) => state.user.userName);
+  const role = useSelector((state) => state.user.role);
+  console.log(role);
 
   return (
     <div className={classes.container}>
@@ -26,10 +28,16 @@ export const AuthNav = () => {
         />
         <span className={classes["user-name"]}>{userName}</span>
       </Link>
-      <Link to="/admin" className={classes["admin"]} onClick={closeSideMenu}>
-        <IoSettingsOutline />
-        <span>Control Panel</span>
-      </Link>
+      {(role === "SuperAdmin" || role === "Admin") && (
+        <Link
+          to="/admin/categories"
+          className={classes["admin"]}
+          onClick={closeSideMenu}
+        >
+          <IoSettingsOutline />
+          <span>Control Panel</span>
+        </Link>
+      )}
       <Form method="PATCH" action="/logout" className={classes["logout-form"]}>
         <button className={classes["Button-logout"]} onClick={closeSideMenu}>
           Logout
