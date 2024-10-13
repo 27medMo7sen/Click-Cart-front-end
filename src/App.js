@@ -26,7 +26,47 @@ import {
 import { Profile } from "./pages/Profile";
 import { Admin } from "./pages/admin/Admin";
 import { AdminCategory } from "./pages/admin/admin-nav/AdminCategory";
-import { AddCategory } from "./pages/admin/admin-nav/admin-forms/AddCategory";
+import { AddCategory } from "./pages/admin/admin-nav/admin-forms/category/AddCategory";
+import {
+  UpdateCategory,
+  loader as categoriesLoader,
+} from "./pages/admin/admin-nav/admin-forms/category/UpdateCategory";
+import {
+  DeleteCategory,
+  loader as deleteCategoryLoader,
+} from "./pages/admin/admin-nav/admin-forms/category/DeleteCategory";
+import { AdminSubcategory } from "./pages/admin/admin-nav/AdminSubcategory";
+import {
+  AddSubcategory,
+  loader as addSubcategoryLoader,
+} from "./pages/admin/admin-nav/admin-forms/subcategory/AddSubcategory";
+import {
+  UpdateSubcategory,
+  loader as updateSubcategoryLoader,
+} from "./pages/admin/admin-nav/admin-forms/subcategory/UpdateSubcategory";
+import {
+  DeleteSubcategory,
+  loader as deleteSubcategoryLoader,
+} from "./pages/admin/admin-nav/admin-forms/subcategory/DeleteSubcategory";
+import { AdminBrand } from "./pages/admin/admin-nav/AdminBrand";
+import {
+  AddBrand,
+  loader as addBrandLoader,
+} from "./pages/admin/admin-nav/admin-forms/brand/AddBrand";
+import {
+  UpdateBrand,
+  loader as updateBrandLoader,
+} from "./pages/admin/admin-nav/admin-forms/brand/UpdateBrand";
+import {
+  DeleteBrand,
+  loader as deleteBrandLoader,
+} from "./pages/admin/admin-nav/admin-forms/brand/DeleteBrand";
+import { AdminProduct } from "./pages/admin/admin-nav/AdminProduct";
+import {
+  AddProduct,
+  loader as addProductLoader,
+} from "./pages/admin/admin-nav/admin-forms/product/AddProduct";
+
 function App() {
   const isDark = useSelector((state) => state.ui.darkMode);
   useEffect(() => {
@@ -68,12 +108,71 @@ function App() {
           element: <Admin />,
           children: [
             {
-              path: "",
+              path: "categories",
               element: <AdminCategory />,
               children: [
                 {
                   index: true,
                   element: <AddCategory />,
+                },
+                {
+                  path: "update",
+                  element: <UpdateCategory />,
+                  loader: categoriesLoader,
+                },
+                {
+                  path: "delete",
+                  element: <DeleteCategory />,
+                  loader: deleteCategoryLoader,
+                },
+              ],
+            },
+            {
+              path: "subcategories",
+              element: <AdminSubcategory />,
+              children: [
+                {
+                  index: true,
+                  element: <AddSubcategory />,
+                  loader: addSubcategoryLoader,
+                },
+                {
+                  path: "update",
+                  element: <UpdateSubcategory />,
+                  loader: updateSubcategoryLoader,
+                },
+                {
+                  path: "delete",
+                  element: <DeleteSubcategory />,
+                  loader: deleteSubcategoryLoader,
+                },
+              ],
+            },
+            {
+              path: "brands",
+              element: <AdminBrand />,
+              children: [
+                { index: true, element: <AddBrand />, loader: addBrandLoader },
+                {
+                  path: "update",
+                  element: <UpdateBrand />,
+                  loader: updateBrandLoader,
+                },
+                {
+                  path: "delete",
+                  element: <DeleteBrand />,
+                  loader: deleteBrandLoader,
+                },
+              ],
+            },
+            {
+              path: "products",
+              element: <AdminProduct />,
+              children: [
+                {
+                  index: true,
+                  element: <AddProduct />,
+                  loader: addProductLoader,
                 },
               ],
             },
