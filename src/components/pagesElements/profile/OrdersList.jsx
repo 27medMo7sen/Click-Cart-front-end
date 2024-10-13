@@ -1,10 +1,10 @@
 import { OrderItem } from "./OrderItem";
 import classes from "./OrdersList.module.css";
-import delivery from "../../../components/icons/delivery.png";
-import canceled from "../../../components/icons/canceled.png";
-import delivered from "../../../components/icons/delivered.png";
-import pending from "../../../components/icons/pending.png";
-import confirmed from "../../../components/icons/confirmed.png";
+import delivery from "../../../assets/delivered.png";
+import canceled from "../../../assets/canceled.png";
+import delivered from "../../../assets/delivered.png";
+import pending from "../../../assets/pending.png";
+import confirmed from "../../../assets/confirmed.png";
 const orders = [
   {
     id: 1,
