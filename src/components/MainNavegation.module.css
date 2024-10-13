@@ -219,6 +219,9 @@ li {
   color: var(--primary-color);
   border-radius: 8px;
 }
+.admin:hover {
+  background-color: var(--hover-color);
+}
 .admin span {
   display: flex;
   font-size: 12px;

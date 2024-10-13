@@ -139,13 +139,8 @@ export const MainNavegation = () => {
                   <span className={classes["user-name"]}>{userName}</span>
                 </NavLink>
               ))}
-            {userToken && role === ("Admin" || "SuperAdmin") && (
-              <NavLink
-                to="/admin"
-                className={({ isActive }) =>
-                  isActive ? classes["admin-active"] : classes.admin
-                }
-              >
+            {userToken && (role === "SuperAdmin" || role === "Admin") && (
+              <NavLink to="/admin/categories" className={classes.admin}>
                 <IoSettingsOutline />
                 <span>Control Panel</span>
               </NavLink>
